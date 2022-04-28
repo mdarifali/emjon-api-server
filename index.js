@@ -14,12 +14,12 @@ app.use(express.json());
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.053o8.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
-async function run (){
-    try{
+async function run() {
+    try {
         await client.connect();
         const productCollection = client.db('newdatabase').collection('apidata');
 
-        app.get('/apidata', async(req, res) => {
+        app.get('/apidata', async (req, res) => {
             const query = {}
             const cursor = productCollection.find(query);
             const product = await cursor.toArray();
@@ -28,11 +28,11 @@ async function run (){
         })
     }
 
-    finally{ }
+    finally { }
 
 };
 
-run().catch(console.log('MongoDB Connected'));
+run().catch(console.log('MongoDB API Connected'));
 
 
 app.get('/', (req, res) => {
